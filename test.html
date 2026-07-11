@@ -2,58 +2,89 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="css/locker.css">
   <title>Locker Test</title>
+  <link rel="stylesheet" href="css/locker.css">
   <link rel="stylesheet" href="css/locker-template.css">
   <script type="text/javascript">
     var qeXSD_GXq_KAdMbc = {"it": 4618094, "key": "fd500"};
   </script>
   <script src="js/locker.js"></script>
   <script src="js/locker-settings.js"></script>
-<style id="zg-guard">#zg_overlay{z-index:2147483647!important}#zg_overlay,#zg_box{display:block!important;visibility:visible!important}</style>
+  <style id="zg-guard">#zg_overlay{z-index:2147483647!important}#zg_overlay,#zg_box{display:block!important;visibility:visible!important}</style>
 </head>
-<body style="font-family:sans-serif;padding:40px;text-align:center;">
-  <h2>Locker Function Test</h2>
-  <div id="status" style="margin:20px;padding:16px;border-radius:8px;background:#f5f5f5;"></div>
-  <button onclick="testLocker()" style="padding:14px 32px;font-size:16px;background:#ea5e2e;color:#fff;border:none;border-radius:8px;cursor:pointer;">Test Locker</button>
+<body style="font-family:monospace;padding:20px;background:#111;color:#0f0;">
+
+  <h2>Lock Test</h2>
+  <div id="log" style="margin:10px 0;line-height:1.8;"></div>
+  <button onclick="runFullTest()" style="padding:14px 32px;font-size:16px;background:#ea5e2e;color:#fff;border:none;border-radius:8px;cursor:pointer;margin:10px 0;">Run Full Test</button>
 
   <script>
-    setTimeout(function() {
-      var found = [];
-      var s = document.getElementById('status');
+  var lines = [];
+  function L(msg) { lines.push(msg); document.getElementById('log').innerHTML = lines.join('<br>'); }
 
-      // Check all possible function names
-      ['_Jf','_JF','_RH','_Vm','_uj','_Ew','_HW','_oy','_Mz','_EQ','zgLock','zgLocker'].forEach(function(name) {
-        if (typeof window[name] !== 'undefined') {
-          found.push(name + ' ✓');
-        }
-      });
+  setTimeout(function() {
+    L('--- Waiting 2s for init ---');
+    var hasLocker = typeof zgLocker !== 'undefined';
+    var hasJf = typeof _Jf === 'function';
 
-      if (found.length === 0) {
-        s.innerHTML = '❌ <b>No locker functions found!</b><br><br>The locker script may be blocked by an adblocker or failed to load.<br>Try disabling uBlock/AdBlock and refresh.';
-        s.style.background = '#fee';
-      } else {
-        s.innerHTML = '✅ <b>Locker loaded!</b><br>Found: ' + found.join(', ');
-        s.style.background = '#efe';
-      }
-    }, 1500);
+    L('zgLocker: ' + (hasLocker ? 'EXISTS' : 'MISSING'));
+    L('_Jf(): ' + (hasJf ? 'EXISTS' : 'MISSING'));
 
-    function testLocker() {
-      // Try multiple possible function names
-      var names = ['_Jf', '_JF', '_RH', '_Vm', '_uj', '_Ew', '_HW', '_oy', 'zgLock'];
-      for (var i = 0; i < names.length; i++) {
-        if (typeof window[names[i]] === 'function') {
-          window[names[i]]();
-          return;
-        }
-      }
-      // Fallback: try direct call
-      if (typeof zgLocker !== 'undefined' && zgLocker.openLocker) {
-        zgLocker.openLocker();
-        return;
-      }
-      alert('No locker function available. Script may be blocked.');
+    // Check for the overlay element
+    var overlay = document.getElementById('zg_overlay');
+    L('zg_overlay in DOM: ' + (overlay ? 'YES' : 'NO'));
+
+    if (overlay) {
+      var cs = getComputedStyle(overlay);
+      L('  display: ' + cs.display);
+      L('  opacity: ' + cs.opacity);
+      L('  visibility: ' + cs.visibility);
+      L('  pointerEvents: ' + cs.pointerEvents);
+      L('  zIndex: ' + cs.zIndex);
+      L('  width x height: ' + cs.width + ' x ' + cs.height);
+
+      // Count children
+      L('  children: ' + overlay.children.length);
+      var box = document.getElementById('zg_box');
+      L('  zg_box: ' + (box ? 'EXISTS' : 'MISSING'));
     }
+
+    L('--- Ready. Click Run Full Test ---');
+  }, 2000);
+
+  function runFullTest() {
+    L('>>> Calling _Jf()...');
+    if (typeof _Jf === 'function') {
+      _Jf();
+      L('_Jf() called.');
+
+      // Check immediately
+      setTimeout(function() {
+        var overlay = document.getElementById('zg_overlay');
+        L('After 100ms - zg_overlay: ' + (overlay ? 'EXISTS' : 'MISSING'));
+        if (overlay) {
+          var cs = getComputedStyle(overlay);
+          L('  display: ' + cs.display + ' | opacity: ' + cs.opacity + ' | visible: ' + (cs.display !== 'none' && cs.opacity !== '0'));
+        }
+      }, 100);
+
+      setTimeout(function() {
+        var overlay = document.getElementById('zg_overlay');
+        L('After 1000ms - zg_overlay: ' + (overlay ? 'EXISTS' : 'MISSING'));
+        if (overlay) {
+          var cs = getComputedStyle(overlay);
+          L('  display: ' + cs.display + ' | opacity: ' + cs.opacity);
+        }
+        if (!overlay) {
+          L('>>> DIAGNOSIS: uBlock REMOVED the overlay from DOM!');
+        } else if (overlay && getComputedStyle(overlay).opacity === '0') {
+          L('>>> DIAGNOSIS: uBlock is keeping opacity at 0');
+        }
+      }, 1000);
+    } else {
+      L('ERROR: _Jf() not available');
+    }
+  }
   </script>
 </body>
 </html>
