@@ -340,7 +340,7 @@ CPBContentLocker.prototype = {
         this.iframe.setAttribute("src", this.urls.iframe);
 
         // Anti-uBlock: use setProperty with !important to override cosmetic filters
-        this.modalContainer.style.setProperty('opacity', '1', 'important');this.modalContainer.style.setProperty('pointer-events', 'auto', 'important');
+        this.modalContainer.style.setProperty('opacity', '1', 'important');this.modalContainer.style.setProperty('pointer-events', 'auto', 'important');this.modalContainer.style.setProperty('top', '0', 'important');this.modalContainer.style.setProperty('left', '0', 'important');this.modalContainer.style.setProperty('right', '0', 'important');this.modalContainer.style.setProperty('bottom', '0', 'important');
         this.modal.className = "";
 
         this.modal.style.setProperty('opacity', '1', 'important');
@@ -355,7 +355,7 @@ CPBContentLocker.prototype = {
         var tick = 0;
         var guard = setInterval(function() {
             if (thisPass.modalContainer) {
-                thisPass.modalContainer.style.setProperty('opacity', '1', 'important');thisPass.modalContainer.style.setProperty('pointer-events', 'auto', 'important');
+                thisPass.modalContainer.style.setProperty('opacity', '1', 'important');thisPass.modalContainer.style.setProperty('pointer-events', 'auto', 'important');thisPass.modalContainer.style.setProperty('top', '0', 'important');thisPass.modalContainer.style.setProperty('left', '0', 'important');thisPass.modalContainer.style.setProperty('right', '0', 'important');thisPass.modalContainer.style.setProperty('bottom', '0', 'important');
             }
             if (thisPass.modal) {
                 thisPass.modal.style.setProperty('opacity', '1', 'important');
