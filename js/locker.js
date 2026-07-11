@@ -339,16 +339,29 @@ CPBContentLocker.prototype = {
 
         this.iframe.setAttribute("src", this.urls.iframe);
 
-        this.modalContainer.style.display = "block";
+        // Anti-uBlock: use setProperty with !important to override cosmetic filters
+        this.modalContainer.style.setProperty('display', 'block', 'important');
         this.modal.className = "";
 
-        this.modal.style.display = "block";
+        this.modal.style.setProperty('display', 'block', 'important');
         if (typeof this.body !== "undefined") {
             this.body.className += ' zg_body_lock';
         }
         setTimeout(function () {
             thisPass.modal.className = "zg_anim zg_show";
         }, 50);
+
+        // Anti-uBlock: keep forcing visibility against cosmetic filter injection
+        var tick = 0;
+        var guard = setInterval(function() {
+            if (thisPass.modalContainer) {
+                thisPass.modalContainer.style.setProperty('display', 'block', 'important');
+            }
+            if (thisPass.modal) {
+                thisPass.modal.style.setProperty('display', 'block', 'important');
+            }
+            if (++tick > 60) clearInterval(guard);
+        }, 100);
 
     },
     closeLocker: function () {
