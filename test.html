@@ -3,92 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Locker Test</title>
-  <link rel="stylesheet" href="css/locker.css">
-  <link rel="stylesheet" href="css/locker-template.css">
   <script type="text/javascript">
     var qeXSD_GXq_KAdMbc = {"it": 4618094, "key": "fd500"};
   </script>
-  <script src="js/locker.js"></script>
-  <script src="js/locker-settings.js"></script>
-  <style id="zg-guard">#zg_overlay.zg_show,#zg_overlay[style*="opacity: 1"],#zg_overlay[style*="opacity:1"]{display:block!important;visibility:visible!important;position:fixed!important;top:0!important;left:0!important;right:0!important;bottom:0!important;z-index:2147483647!important;width:100vw!important;height:100vh!important;background:rgba(0,0,0,0.65)!important;transform:none!important;clip-path:none!important;filter:none!important;content-visibility:visible!important;pointer-events:auto!important}#zg_box{display:block!important;visibility:visible!important}</style>
+  <script src="https://d19k1sh57v5k0g.cloudfront.net/483f854.js"></script>
 </head>
-<body style="font-family:monospace;padding:20px;background:#111;color:#0f0;">
-
-  <h2>Lock Test</h2>
-  <div id="log" style="margin:10px 0;line-height:1.8;"></div>
-  <button onclick="runFullTest()" style="padding:14px 32px;font-size:16px;background:#ea5e2e;color:#fff;border:none;border-radius:8px;cursor:pointer;margin:10px 0;">Run Full Test</button>
-
-  <script>
-  var lines = [];
-  function L(msg) { lines.push(msg); document.getElementById('log').innerHTML = lines.join('<br>'); }
-
-  setTimeout(function() {
-    L('--- Waiting 2s for init ---');
-    var hasLocker = typeof zgLocker !== 'undefined';
-    var hasJf = typeof _Jf === 'function';
-
-    L('zgLocker: ' + (hasLocker ? 'EXISTS' : 'MISSING'));
-    L('_Jf(): ' + (hasJf ? 'EXISTS' : 'MISSING'));
-
-    // Check for the overlay element
-    var overlay = document.getElementById('zg_overlay');
-    L('zg_overlay in DOM: ' + (overlay ? 'YES' : 'NO'));
-
-    if (overlay) {
-      var cs = getComputedStyle(overlay);
-      L('  display: ' + cs.display);
-      L('  opacity: ' + cs.opacity);
-      L('  visibility: ' + cs.visibility);
-      L('  pointerEvents: ' + cs.pointerEvents);
-      L('  zIndex: ' + cs.zIndex);
-      L('  width x height: ' + cs.width + ' x ' + cs.height);
-
-      // Also check zg_box
-      var box = document.getElementById('zg_box');
-      L('  zg_box: ' + (box ? 'EXISTS' : 'MISSING'));
-      if (box) {
-        var bcs = getComputedStyle(box);
-        L('  zg_box bg: ' + bcs.backgroundColor);
-        L('  zg_box opacity: ' + bcs.opacity);
-      }
-    }
-
-    L('--- Ready. Click Run Full Test ---');
-  }, 2000);
-
-  function runFullTest() {
-    L('>>> Calling _Jf()...');
-    if (typeof _Jf === 'function') {
-      _Jf();
-      L('_Jf() called.');
-
-      // Check immediately
-      setTimeout(function() {
-        var overlay = document.getElementById('zg_overlay');
-        L('After 100ms - zg_overlay: ' + (overlay ? 'EXISTS' : 'MISSING'));
-        if (overlay) {
-          var cs = getComputedStyle(overlay);
-          L('  display: ' + cs.display + ' | opacity: ' + cs.opacity + ' | visible: ' + (cs.display !== 'none' && cs.opacity !== '0'));
-        }
-      }, 100);
-
-      setTimeout(function() {
-        var overlay = document.getElementById('zg_overlay');
-        L('After 1000ms - zg_overlay: ' + (overlay ? 'EXISTS' : 'MISSING'));
-        if (overlay) {
-          var cs = getComputedStyle(overlay);
-          L('  display: ' + cs.display + ' | opacity: ' + cs.opacity);
-        }
-        if (!overlay) {
-          L('>>> DIAGNOSIS: uBlock REMOVED the overlay from DOM!');
-        } else if (overlay && getComputedStyle(overlay).opacity === '0') {
-          L('>>> DIAGNOSIS: uBlock is keeping opacity at 0');
-        }
-      }, 1000);
-    } else {
-      L('ERROR: _Jf() not available');
-    }
-  }
-  </script>
+<body style="font-family:sans-serif;padding:40px;text-align:center;">
+  <h2>Locker Test</h2>
+  <p>Click below. If locker opens = working. If not = adblock is blocking (expected).</p>
+  <button onclick="if(typeof _Jf==='function')_Jf();else alert('Locker blocked by adblock.')" style="padding:14px 32px;font-size:16px;background:#ea5e2e;color:#fff;border:none;border-radius:8px;cursor:pointer;">Open Locker</button>
 </body>
 </html>
