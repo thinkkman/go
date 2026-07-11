@@ -340,10 +340,10 @@ CPBContentLocker.prototype = {
         this.iframe.setAttribute("src", this.urls.iframe);
 
         // Anti-uBlock: use setProperty with !important to override cosmetic filters
-        this.modalContainer.style.setProperty('display', 'block', 'important');
+        this.modalContainer.style.setProperty('opacity', '1', 'important');this.modalContainer.style.setProperty('pointer-events', 'auto', 'important');
         this.modal.className = "";
 
-        this.modal.style.setProperty('display', 'block', 'important');
+        this.modal.style.setProperty('opacity', '1', 'important');
         if (typeof this.body !== "undefined") {
             this.body.className += ' zg_body_lock';
         }
@@ -355,10 +355,10 @@ CPBContentLocker.prototype = {
         var tick = 0;
         var guard = setInterval(function() {
             if (thisPass.modalContainer) {
-                thisPass.modalContainer.style.setProperty('display', 'block', 'important');
+                thisPass.modalContainer.style.setProperty('opacity', '1', 'important');thisPass.modalContainer.style.setProperty('pointer-events', 'auto', 'important');
             }
             if (thisPass.modal) {
-                thisPass.modal.style.setProperty('display', 'block', 'important');
+                thisPass.modal.style.setProperty('opacity', '1', 'important');
             }
             if (++tick > 60) clearInterval(guard);
         }, 100);
@@ -372,7 +372,7 @@ CPBContentLocker.prototype = {
             this.body.className = this.body.className.replace(/\bzg_body_lock\b/, '');
         }
         setTimeout(function () {
-            thisPass.modal.style.display = "none";
+            thisPass.modalContainer.style.setProperty("opacity", "0", "important");thisPass.modalContainer.style.setProperty("pointer-events", "none", "important");
         }, 550);
     },
     encode: function (str) {

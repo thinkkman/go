@@ -15,7 +15,7 @@ body.zg_body_lock {
     }
 }
 #zg_overlay #zg_box {
-    display: none; /* Hidden by default */
+    opacity:0;pointer-events:none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 9999999999999;; /* Sit on top */
     left: 0;

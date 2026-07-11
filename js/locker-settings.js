@@ -20,7 +20,7 @@ function zgInit(){
         //HTML
         zgLocker.removeElByID("zg_overlay");
         var d=document.createElement("div");
-        d.style="display:none;";
+        d.style="opacity:0;pointer-events:none;position:fixed;inset:0";
         d.id="zg_overlay";
         d.innerHTML=html;
         document.getElementsByTagName("body")[0].appendChild(d);
