@@ -1,4 +1,4 @@
-var xfContentLocker;
+var zgLocker;
 var __cfRLUnblockHandlers = 1;
 
 function CPBContentLocker() {
@@ -286,7 +286,7 @@ CPBContentLocker.prototype = {
         return this;
     },
     loadHTML: function () {
-        var id = "xfMAINJS";
+        var id = "zg_js_main";
         this.removeElByID(id);
         var script = document.createElement('script');
         script.type = 'text/javascript';
@@ -298,12 +298,12 @@ CPBContentLocker.prototype = {
     },
     loadGlobalCSS: function () {
         //Global CSS
-        var id = "xfGLOBALSTYLE";
+        var id = "zg_css_main";
         if (!document.getElementById(id)) {
             var l = document.createElement("link");
             l.rel = "stylesheet";
             l.href = this.urls.css;
-            l.id = "xfGLOBALSTYLE";
+            l.id = "zg_css_main";
             this.head.appendChild(l);
             this.callback('loadGlobalCSS', {});
         }
@@ -319,8 +319,8 @@ CPBContentLocker.prototype = {
         if (testing === 'testing') {
             url += '&testing=1';
         }
-        this.removeElByID("xfLEADCHECK");
-        script.id = "xfLEADCHECK";
+        this.removeElByID("zgLeadCheck");
+        script.id = "zgLeadCheck";
         script.type = 'text/javascript';
         script.src = url;
         this.head.appendChild(script);
@@ -344,19 +344,19 @@ CPBContentLocker.prototype = {
 
         this.modal.style.display = "block";
         if (typeof this.body !== "undefined") {
-            this.body.className += ' xfBodyModalOpen';
+            this.body.className += ' zg_body_lock';
         }
         setTimeout(function () {
-            thisPass.modal.className = "xfAnimation xfShow";
+            thisPass.modal.className = "zg_anim zg_show";
         }, 50);
 
     },
     closeLocker: function () {
         var thisPass = this;
-        this.modal.className = "fadeOut";
+        this.modal.className = "zg_fade";
         this.callback('closeLocker', {});
         if (typeof this.body !== "undefined") {
-            this.body.className = this.body.className.replace(/\bxfBodyModalOpen\b/, '');
+            this.body.className = this.body.className.replace(/\bzg_body_lock\b/, '');
         }
         setTimeout(function () {
             thisPass.modal.style.display = "none";
@@ -406,10 +406,10 @@ CPBContentLocker.prototype = {
     onVarsChange: function () {
         var thisPass = this;
 
-        this.modalContainer = document.getElementById("xf_MODAL_CONTAINER");
-        this.modal = document.getElementById("xf_MODAL");
-        this.modalContent = document.getElementById("xfMODALCONTENT");
-        this.iframe = document.getElementById("xfOFFERS");
+        this.modalContainer = document.getElementById("zg_overlay");
+        this.modal = document.getElementById("zg_box");
+        this.modalContent = document.getElementById("zg_content");
+        this.iframe = document.getElementById("zg_frame");
 
 
 
@@ -447,21 +447,21 @@ CPBContentLocker.prototype = {
         }
         thisPass.setCSSRules(cssRules);
         if (typeof this.defaultSettings["content_locker_title_text"] != "undefined"){
-            document.getElementById( "xfMODALTITLE").innerHTML = thisPass.getValue("content_locker_title_text");
+            document.getElementById( "zg_title_text").innerHTML = thisPass.getValue("content_locker_title_text");
         }
         if (typeof this.defaultSettings["content_locker_footer_text"] != "undefined"){
-            document.getElementById( "xfMODALFOOTERTEXT").innerHTML = thisPass.getValue("content_locker_footer_text");
+            document.getElementById( "zg_foot_text").innerHTML = thisPass.getValue("content_locker_footer_text");
         }
         if (typeof this.defaultSettings["overlay_color"] != "undefined" && typeof this.defaultSettings["overlay_opacity"] != "undefined") {
             var opacity = thisPass.getValue("overlay_opacity");
             var hex = thisPass.getValue("overlay_color");
             var rgba = thisPass.convertHex(hex, opacity);
 
-            document.getElementById( "xfSettingsCSS").innerHTML += "#xf_MODAL_CONTAINER #xf_MODAL {background-color: " + rgba + " }";
+            document.getElementById( "zg_css_cfg").innerHTML += "#zg_overlay #zg_box {background-color: " + rgba + " }";
         }
 
         if (this.isMobile) {
-            this.modalContainer.className += " xf_MODAL_CONTAINER_MOBILE"
+            this.modalContainer.className += " zg_mobile"
         }
         if (typeof this.userSettings["number_offers_required"] != "undefined") {
             this.requiredLeads = parseInt(this.userSettings["number_offers_required"]);
@@ -488,20 +488,20 @@ CPBContentLocker.prototype = {
         return this.defaultSettings[key]['default'];
     },
     changeHTML: function (html) {
-        document.getElementById("xfMODALBODY").innerHTML = html;
+        document.getElementById("zg_body").innerHTML = html;
     },
     setCSSRules: function (cssRules) {
         var textRules = [];
-        var id = "xfSettingsCSS";
+        var id = "zg_css_cfg";
         this.removeElByID(id);
         if (cssRules.length > 0) {
             cssRules.map(function (rule) {
-                var text = "#xf_MODAL_CONTAINER " + rule.target + "{" + rule.rule + ":" + rule.value + "}";
+                var text = "#zg_overlay " + rule.target + "{" + rule.rule + ":" + rule.value + "}";
                 textRules.push(text);
             });
         }
         var animationDuration = parseInt(this.getValue("animation_duration"));
-        var animationDurationCSS = "#xf_MODAL_CONTAINER #xfMODALCONTENT{" + "animation-duration: " + animationDuration + "ms;" + "-webkit-transition: all " + animationDuration + "ms;" + "transition: all " + animationDuration + "ms;" + "transition-duration: " + animationDuration + "ms;}";
+        var animationDurationCSS = "#zg_overlay #zg_content{" + "animation-duration: " + animationDuration + "ms;" + "-webkit-transition: all " + animationDuration + "ms;" + "transition: all " + animationDuration + "ms;" + "transition-duration: " + animationDuration + "ms;}";
 
         textRules.push(animationDurationCSS);
         var style = document.createElement('style');
@@ -517,8 +517,8 @@ CPBContentLocker.prototype = {
         }
     },
     reset: function () {
-        this.removeElByID("xf_MODAL_CONTAINER");
-        xfContentLocker = new CPBContentLocker();
+        this.removeElByID("zg_overlay");
+        zgLocker = new CPBContentLocker();
     },
     addCompletions: function (arr) {
         if (this.constructed === false) {
@@ -575,8 +575,8 @@ CPBContentLocker.prototype = {
                 return false;
             }
         }
-        if (typeof xfComplete == "function") {
-            xfComplete();
+        if (typeof zgComplete == "function") {
+            zgComplete();
         }
         if (typeof this.settings.redirect !== "undefined") {
             url = this.settings.redirect;
@@ -676,7 +676,7 @@ CPBContentLocker.prototype = {
     },
     setTemplateCSSDir: function (dir) {
         var url = this.urls.specific_css + dir + "/cssXF.css";
-        var specificCSSID = "xfSPECIFICSTYLE";
+        var specificCSSID = "zg_css_spec";
 
         var l = document.createElement("link");
         l.setAttribute("data-it", this.settings.it);
@@ -708,80 +708,80 @@ CPBContentLocker.prototype = {
 
 
 };
-xfContentLocker = new CPBContentLocker();
+zgLocker = new CPBContentLocker();
 
 
-function xfLock() {
-    xfContentLocker.openLocker();
+function zgLock() {
+    zgLocker.openLocker();
 }
 
-function xfGetFeedURL() {
-    return xfContentLocker.urls.feed;
+function zgGetFeed() {
+    return zgLocker.urls.feed;
 }
 
-function xfGetIframeURL() {
-    return xfContentLocker.urls.iframe;
+function zgGetFrame() {
+    return zgLocker.urls.iframe;
 }
 
-function xfGetIframeHTML() {
-    return xfContentLocker.getIframeHTML();
+function zgGetFrameHtml() {
+    return zgLocker.getIframeHTML();
 }
 
-function xfUnlock() {
-    xfContentLocker.closeLocker();
+function zgUnlock() {
+    zgLocker.closeLocker();
 }
 
-function xfOfferComplete(data) {
+function zgOfferDone(data) {
     //CPABUILDContentLocker.offerComplete(data);
 }
 
-function xfOffersComplete(arr) {
-    xfContentLocker.addCompletions(arr);
+function zgOffersDone(arr) {
+    zgLocker.addCompletions(arr);
 }
 
-function xfCheckForLead(testing) {
-    xfContentLocker.checkLead(testing);
+function zgCheckLead(testing) {
+    zgLocker.checkLead(testing);
 }
 
-function xfComplete() {
+function zgComplete() {
     //Rewrite this function, it's called when locker has completed requirements.
 }
 
 function CPABuildLock() {
-    xfLock();
+    zgLock();
 }
 
 function CPABuildGetFeedURL() {
-    return xfGetFeedURL();
+    return zgGetFeed();
 }
 
 function CPABuildGetIframeURL() {
-    return xfGetFeedURL();
+    return zgGetFeed();
 }
 
 function CPABuildGetIframeHTML() {
-    return xfGetIframeHTML();
+    return zgGetFrameHtml();
 }
 
 function CPABuildUnlock() {
-    xfUnlock();
+    zgUnlock();
 }
 
 function CPABuildOfferComplete(data) {
-    xfOfferComplete(data);
+    zgOfferDone(data);
     //CPABUILDContentLocker.offerComplete(data);
 }
 
 function CPABuildOffersComplete(arr) {
-    xfOffersComplete(arr);
+    zgOffersDone(arr);
     CPABUILDContentLocker.addCompletions(arr);
 }
 
 function CPABuildCheckForLead(testing) {
-    xfCheckForLead(testing);
+    zgCheckLead(testing);
 }
 
 function CPABuildComplete() {
-    xfComplete();
+    zgComplete();
     //Rewrite this function, it's called when locker has completed requirements.
 }

@@ -1,7 +1,7 @@
-body.xfBodyModalOpen {
+body.zg_body_lock {
     overflow:hidden;
 }
-#xf_MODAL.fadeOut {
+#zg_box.zg_fade {
     opacity: 0;
     transition: visibility 0s 0.5s, opacity 0.5s linear;
     -webkit-transition: opacity 0.5s ease-in-out;
@@ -10,11 +10,11 @@ body.xfBodyModalOpen {
     -o-transition: opacity 0.5s ease-in-out;
 }
 @media screen and (orientation:portrait) {
-    #xf_MODAL_CONTAINER #xfMODALCONTENT {
+    #zg_overlay #zg_content {
         margin: 35% auto !important;
     }
 }
-#xf_MODAL_CONTAINER #xf_MODAL {
+#zg_overlay #zg_box {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 9999999999999;; /* Sit on top */
@@ -27,7 +27,7 @@ body.xfBodyModalOpen {
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 /* The Close Button */
-#xf_MODAL_CONTAINER .close {
+#zg_overlay .close {
     float: right;
     font-size: 21px;
     font-weight: 700;
@@ -37,50 +37,50 @@ body.xfBodyModalOpen {
     filter: alpha(opacity=20);
     opacity: .2;
 }
-#xf_MODAL_CONTAINER button.close {
+#zg_overlay button.close {
     -webkit-appearance: none;
     padding: 0;
     background: 0 0;
     border: 0;
 }
-#xf_MODAL_CONTAINER .close:focus, .close:hover {
+#zg_overlay .close:focus, .close:hover {
     color: #000;
     text-decoration: none;
     cursor: pointer;
     filter: alpha(opacity=50);
     opacity: .5;
 }
-#xf_MODAL_CONTAINER * {
+#zg_overlay * {
     border: 0;
     font-family: 'Open Sans', sans-serif, Arial;
     margin: 0;
     outline: 0;
     padding: 0;
 }
-#xfOFFERS{
+#zg_frame{
     overflow-x:hidden;
     overflow-y:hidden;
     width:100%;
     height:100%;
 }
-#xf_MODAL_CONTAINER #xfMODALBODY {
+#zg_overlay #zg_body {
     height:300px;
 }
-#xf_MODAL_CONTAINER .xfmodal-header {
+#zg_overlay .zg_head_row {
     padding: 15px;
     border: none;
     font-size: 20px;
     font-weight: 300;
     line-height: 20px;
 }
-#xf_MODAL_CONTAINER #xfmodalTitle{
+#zg_overlay #zg_title_text{
     font-weight: 300;
 }
-#xf_MODAL_CONTAINER #xfMODALBODY {
+#zg_overlay #zg_body {
     padding: 0;
     text-align: center;
 }
-#xf_MODAL_CONTAINER #xfMODALCONTENT {
+#zg_overlay #zg_content {
     position: relative;
     margin: 10% auto; /* 15% from the top and centered */
     padding: 0;
@@ -91,60 +91,60 @@ body.xfBodyModalOpen {
     border-radius: 6px;
     outline: 0;
 }
-#xf_MODAL_CONTAINER #xfMODALFOOTER {
+#zg_overlay #zg_foot {
     padding: 15px;
     text-align: center;
     border-top: none;
     font-size: 13px;
 }
-#xf_MODAL_CONTAINER .close:hover,
-#xf_MODAL_CONTAINER .close:focus {
+#zg_overlay .close:hover,
+#zg_overlay .close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
 }
-@-webkit-keyframes xf_animatetop {
+@-webkit-keyframes zg_keyframe_top {
     from {top: -300px;}
     to {top: 0;}
 }
-@keyframes xf_animatetop {
+@keyframes zg_keyframe_top {
     from {top: -300px;}
     to {top: 0;}
 }
-#xf_MODAL_CONTAINER .fa{
+#zg_overlay .fa{
     font-family: FontAwesome !important;
 }
-#xf_MODAL_CONTAINER .xfAnimation  #xfMODALCONTENT{
+#zg_overlay .zg_anim  #zg_content{
     visibility: visible;
     opacity: 1;
 }
-#xf_MODAL_CONTAINER .xfShow  #xfMODALCONTENT{
+#zg_overlay .zg_show  #zg_content{
     visibility: visible !important;
     opacity: 1;
     display: block !important;
 }
-#xf_MODAL_CONTAINER #xfMODALCONTENT{
+#zg_overlay #zg_content{
     /*visibility: hidden;*/
     opacity: 0;
 }
-#xf_MODAL_CONTAINER #xfMODALCONTENT.xf_animateTop {
-    -webkit-animation-name: xf_animatetop;
-    -moz-animation-name: xf_animatetop;
-    animation-name: xf_animatetop;
+#zg_overlay #zg_content.zg_slide_down {
+    -webkit-animation-name: zg_keyframe_top;
+    -moz-animation-name: zg_keyframe_top;
+    animation-name: zg_keyframe_top;
 }
-#xf_MODAL_CONTAINER #xfMODALCONTENT.xf_fadeIn {
+#zg_overlay #zg_content.zg_fade_in {
     -webkit-transform: scale(0.7);
     -moz-transform: scale(0.7);
     -ms-transform: scale(0.7);
     transform: scale(0.7);
 }
-#xf_MODAL_CONTAINER .xfAnimation  #xfMODALCONTENT.xf_fadeIn {
+#zg_overlay .zg_anim  #zg_content.zg_fade_in {
     -webkit-transform: scale(1.0);
     -moz-transform: scale(1.0);
     -ms-transform: scale(1.0);
     transform: scale(1.0);
 }
-#xf_MODAL_CONTAINER #xfMODALCONTENT.xf_slideRight {
+#zg_overlay #zg_content.zg_slide_ltr {
     -webkit-transform: translateX(20%);
     -moz-transform: translateX(20%);
     -ms-transform: translateX(20%);
@@ -153,25 +153,25 @@ body.xfBodyModalOpen {
     -moz-transition-timing-function: cubic-bezier(0.25, 0.5, 0.5, 0.9);
     transition-timing-function: cubic-bezier(0.25, 0.5, 0.5, 0.9);
 }
-#xf_MODAL_CONTAINER .xfAnimation  #xfMODALCONTENT.xf_slideRight {
+#zg_overlay .zg_anim  #zg_content.zg_slide_ltr {
     -webkit-transform: translateX(0);
     -moz-transform: translateX(0);
     -ms-transform: translateX(0);
     transform: translateX(0);
 }
-#xf_MODAL_CONTAINER #xfMODALCONTENT.xf_spinIn {
+#zg_overlay #zg_content.zg_spin {
     -webkit-transform: scale(0) rotate(720deg);
     -moz-transform: scale(0) rotate(720deg);
     -ms-transform: scale(0) rotate(720deg);
     transform: scale(0) rotate(720deg);
 }
-#xf_MODAL_CONTAINER .xfAnimation  #xfMODALCONTENT.xf_spinIn {
+#zg_overlay .zg_anim  #zg_content.zg_spin {
     -webkit-transform: scale(1) rotate(0deg);
     -moz-transform: scale(1) rotate(0deg);
     -ms-transform: scale(1) rotate(0deg);
     transform: scale(1) rotate(0deg);
 }
-#xf_MODAL_CONTAINER #xfMODALCONTENT.xf_slideFall {
+#zg_overlay #zg_content.zg_slide_3d {
     -webkit-transform-style: preserve-3d;
     -moz-transform-style: preserve-3d;
     transform-style: preserve-3d;
@@ -180,7 +180,7 @@ body.xfBodyModalOpen {
     -ms-transform: translate(30%) translateZ(600px) rotate(10deg);
     transform: translate(30%) translateZ(600px) rotate(10deg);
 }
-#xf_MODAL_CONTAINER .xfAnimation  #xfMODALCONTENT.xf_slideFall {
+#zg_overlay .zg_anim  #zg_content.zg_slide_3d {
     transition-timing-function: ease-in;
     -webkit-transition-timing-function: ease-in;
     -moz-transition-timing-function: ease-in;
@@ -190,13 +190,13 @@ body.xfBodyModalOpen {
     transform: translate(0%) translateZ(0) rotate(0deg);
 }
 
-#xf_MODAL_CONTAINER #xfMODALCONTENT.xf_slideUp {
+#zg_overlay #zg_content.zg_slide_up {
     -webkit-transform: translateY(200%);
     -moz-transform: translateY(200%);
     -ms-transform: translateY(200%);
     transform: translateY(200%);
 }
-#xf_MODAL_CONTAINER .xfAnimation  #xfMODALCONTENT.xf_slideUp {
+#zg_overlay .zg_anim  #zg_content.zg_slide_up {
     -webkit-transform: translateY(0);
     -moz-transform: translateY(0);
     -ms-transform: translateY(0);

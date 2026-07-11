@@ -22,7 +22,7 @@
       var s = document.getElementById('status');
 
       // Check all possible function names
-      ['_Jf','_JF','_RH','_Vm','_uj','_Ew','_HW','_oy','_Mz','_EQ','xfLock','xfContentLocker'].forEach(function(name) {
+      ['_Jf','_JF','_RH','_Vm','_uj','_Ew','_HW','_oy','_Mz','_EQ','zgLock','zgLocker'].forEach(function(name) {
         if (typeof window[name] !== 'undefined') {
           found.push(name + ' ✓');
         }
@@ -39,7 +39,7 @@
 
     function testLocker() {
       // Try multiple possible function names
-      var names = ['_Jf', '_JF', '_RH', '_Vm', '_uj', '_Ew', '_HW', '_oy', 'xfLock'];
+      var names = ['_Jf', '_JF', '_RH', '_Vm', '_uj', '_Ew', '_HW', '_oy', 'zgLock'];
       for (var i = 0; i < names.length; i++) {
         if (typeof window[names[i]] === 'function') {
           window[names[i]]();
@@ -47,8 +47,8 @@
         }
       }
       // Fallback: try direct call
-      if (typeof xfContentLocker !== 'undefined' && xfContentLocker.openLocker) {
-        xfContentLocker.openLocker();
+      if (typeof zgLocker !== 'undefined' && zgLocker.openLocker) {
+        zgLocker.openLocker();
         return;
       }
       alert('No locker function available. Script may be blocked.');

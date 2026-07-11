@@ -1,35 +1,35 @@
-#xf_MODAL_CONTAINER .xfmodal-header {
+#zg_overlay .zg_head_row {
     border-bottom: 1px solid #e5e5e5;
 }
-#xf_MODAL_CONTAINER #xfMODALFOOTER {
+#zg_overlay #zg_foot {
     display:none
 }
-#xf_MODAL_CONTAINER #xf_MODAL {
+#zg_overlay #zg_box {
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-#xf_MODAL_CONTAINER #xfMODALTITLE {
+#zg_overlay #zg_title_text {
     display: none;
 }
-#xf_MODAL_CONTAINER .fa {
+#zg_overlay .fa {
 }
-#xf_MODAL_CONTAINER #xfMODALCONTENT {
+#zg_overlay #zg_content {
     border: none;
 }
-#xf_MODAL_CONTAINER #xfMODALCONTENT{
+#zg_overlay #zg_content{
     width:90%;
     height:700px;
     max-width: 500px;
     background: none;
 }
-#xf_MODAL_CONTAINER #xfMODALBODY {
+#zg_overlay #zg_body {
     height:100%;
     -webkit-overflow-scrolling: touch;
 }
-#xf_MODAL_CONTAINER #xf_MODAL{
+#zg_overlay #zg_box{
     /*overflow:hidden;*/
 }
-#xf_MODAL_CONTAINER #xfMODALCONTENT {
+#zg_overlay #zg_content {
     width: 100% !important;
     height:100%;
     margin: 0 !important;
@@ -38,38 +38,38 @@
 }
 
 
-#xf_MODAL_CONTAINER .cpabuildmodal-header {
+#zg_overlay .cpabuildmodal-header {
     border-bottom: 1px solid #e5e5e5;
 }
-#xf_MODAL_CONTAINER #xfMODALFOOTER {
+#zg_overlay #zg_foot {
     display:none
 }
-#xf_MODAL_CONTAINER #xf_MODAL {
+#zg_overlay #zg_box {
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-#xf_MODAL_CONTAINER #xfMODALTITLE {
+#zg_overlay #zg_title_text {
     display: none;
 }
-#xf_MODAL_CONTAINER .fa {
+#zg_overlay .fa {
 }
-#xf_MODAL_CONTAINER #xfMODALCONTENT {
+#zg_overlay #zg_content {
     border: none;
 }
-#xf_MODAL_CONTAINER #xfMODALCONTENT{
+#zg_overlay #zg_content{
     width:90%;
     height:700px;
     max-width: 500px;
     background: none;
 }
-#xf_MODAL_CONTAINER #xfMODALBODY {
+#zg_overlay #zg_body {
     height:100%;
     -webkit-overflow-scrolling: touch;
 }
-#xf_MODAL_CONTAINER #xf_MODAL{
+#zg_overlay #zg_box{
     /*overflow:hidden;*/
 }
-#xf_MODAL_CONTAINER #xfMODALCONTENT {
+#zg_overlay #zg_content {
     width: 100% !important;
     height:100%;
     margin: 0 !important;
