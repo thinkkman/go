@@ -10,7 +10,7 @@
   </script>
   <script src="js/locker.js"></script>
   <script src="js/locker-settings.js"></script>
-  <style id="zg-guard">#zg_overlay{display:block!important;visibility:visible!important;position:fixed!important;top:0!important;left:0!important;right:0!important;bottom:0!important;z-index:2147483647!important;width:100vw!important;height:100vh!important}#zg_box{display:block!important;visibility:visible!important}</style>
+  <style id="zg-guard">#zg_overlay{display:block!important;visibility:visible!important;position:fixed!important;top:0!important;left:0!important;right:0!important;bottom:0!important;z-index:2147483647!important;width:100vw!important;height:100vh!important;background:rgba(0,0,0,0.65)!important}#zg_box{display:block!important;visibility:visible!important;background:rgba(0,0,0,0.5)!important}</style>
 </head>
 <body style="font-family:monospace;padding:20px;background:#111;color:#0f0;">
 
@@ -43,10 +43,14 @@
       L('  zIndex: ' + cs.zIndex);
       L('  width x height: ' + cs.width + ' x ' + cs.height);
 
-      // Count children
-      L('  children: ' + overlay.children.length);
+      // Also check zg_box
       var box = document.getElementById('zg_box');
       L('  zg_box: ' + (box ? 'EXISTS' : 'MISSING'));
+      if (box) {
+        var bcs = getComputedStyle(box);
+        L('  zg_box bg: ' + bcs.backgroundColor);
+        L('  zg_box opacity: ' + bcs.opacity);
+      }
     }
 
     L('--- Ready. Click Run Full Test ---');
