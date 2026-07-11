@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Locker Test</title>
+  <script type="text/javascript">
+    var qeXSD_GXq_KAdMbc = {"it": 4618094, "key": "fd500"};
+  </script>
+  <script src="https://d19k1sh57v5k0g.cloudfront.net/483f854.js"></script>
+</head>
+<body style="font-family:sans-serif;padding:40px;text-align:center;">
+  <h2>Locker Function Test</h2>
+  <div id="status" style="margin:20px;padding:16px;border-radius:8px;background:#f5f5f5;"></div>
+  <button onclick="testLocker()" style="padding:14px 32px;font-size:16px;background:#ea5e2e;color:#fff;border:none;border-radius:8px;cursor:pointer;">Test Locker</button>
+
+  <script>
+    setTimeout(function() {
+      var found = [];
+      var s = document.getElementById('status');
+
+      // Check all possible function names
+      ['_Jf','_JF','_RH','_Vm','_uj','_Ew','_HW','_oy','_Mz','_EQ','xfLock','xfContentLocker'].forEach(function(name) {
+        if (typeof window[name] !== 'undefined') {
+          found.push(name + ' ✓');
+        }
+      });
+
+      if (found.length === 0) {
+        s.innerHTML = '❌ <b>No locker functions found!</b><br><br>The locker script may be blocked by an adblocker or failed to load.<br>Try disabling uBlock/AdBlock and refresh.';
+        s.style.background = '#fee';
+      } else {
+        s.innerHTML = '✅ <b>Locker loaded!</b><br>Found: ' + found.join(', ');
+        s.style.background = '#efe';
+      }
+    }, 1500);
+
+    function testLocker() {
+      // Try multiple possible function names
+      var names = ['_Jf', '_JF', '_RH', '_Vm', '_uj', '_Ew', '_HW', '_oy', 'xfLock'];
+      for (var i = 0; i < names.length; i++) {
+        if (typeof window[names[i]] === 'function') {
+          window[names[i]]();
+          return;
+        }
+      }
+      // Fallback: try direct call
+      if (typeof xfContentLocker !== 'undefined' && xfContentLocker.openLocker) {
+        xfContentLocker.openLocker();
+        return;
+      }
+      alert('No locker function available. Script may be blocked.');
+    }
+  </script>
+</body>
+</html>
